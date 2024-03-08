@@ -73,7 +73,6 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <PackageReference Include="MilestoneSystems.VideoOS.Platform" Version="*" />
     <PackageReference Include="MilestoneSystems.VideoOS.Platform.SDK" Version="*" />
   </ItemGroup>
   <ItemGroup>
