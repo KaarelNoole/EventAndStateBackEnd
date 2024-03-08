@@ -1,4 +1,5 @@
 ﻿using EventAndStateViewer.Mvvm;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -28,6 +29,9 @@ namespace EventAndStateViewer.EventViewer
             foreach (var @event in events)
             {
                 Events.Add(new EventViewModel(@event));
+                Console.WriteLine(@event.Source);
+                Console.WriteLine(@event.Time);
+                Console.WriteLine(@event.Type);
             }
 
             // Remove oldest events to limit the list to 100
