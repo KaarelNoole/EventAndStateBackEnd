@@ -26,5 +26,7 @@ namespace EventAndStateViewer.Properties
                 return defaultInstance;
             }
         }
+
+        public string SavedRules { get; internal set; }
     }
 }

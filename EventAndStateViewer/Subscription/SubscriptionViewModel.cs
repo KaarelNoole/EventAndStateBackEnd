@@ -1,4 +1,5 @@
 ﻿using EventAndStateViewer.Mvvm;
+using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -34,20 +35,21 @@ namespace EventAndStateViewer.Subscription
 
         public SubscriptionViewModel()
         {
+            Console.WriteLine("SubscriptionViewModel constructor called");
+
             _session = App.DataModel.Session;
 
             Subscribe = new DelegateCommand(OnSubscribeAsync);
             AddRule = new DelegateCommand(OnAddRule);
 
-            // Add a rule
-            AddRule.Execute(null);
-
-            // Discourage subscribing to everything by forcing user to make some change
-            IsDirty = false;
+            // Load saved rules or add a default one
+            LoadRules();
+            
         }
 
         private async Task OnSubscribeAsync()
         {
+            Console.WriteLine("OnSubscribeAsync method called");
             // Unsubscribe, if needed
             if (_subscriptionId != Guid.Empty)
             {
@@ -58,6 +60,9 @@ namespace EventAndStateViewer.Subscription
             var rules = Rules.Select(r => r.ToRule());
             _subscriptionId = await _session.AddSubscriptionAsync(rules, default);
             IsDirty = false;
+
+            // Save rules
+            SaveRules();
 
             Subscribed?.Invoke(this, EventArgs.Empty);
         }
@@ -73,6 +78,7 @@ namespace EventAndStateViewer.Subscription
 
         private void OnRuleRemoved(object sender, EventArgs e)
         {
+            
             if (sender is SubscriptionRuleViewModel rule)
             {
                 rule.Removed -= OnRuleRemoved;
@@ -90,6 +96,76 @@ namespace EventAndStateViewer.Subscription
         private void OnRuleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             IsDirty = true;
+        }
+
+
+        private void LoadRules()
+        {
+            Console.WriteLine("LoadRules method called");
+            var savedRules = Properties.Settings.Default.SavedRules;
+            if (!string.IsNullOrEmpty(savedRules))
+            {
+                try
+                {
+                    // Deserialize the saved rules and add them to the collection
+                    var deserializedRules = JsonConvert.DeserializeObject<ObservableCollection<SubscriptionRuleViewModel>>(savedRules);
+
+                    // Clear existing rules and add the loaded rules
+                    Rules.Clear();
+                    foreach (var rule in deserializedRules)
+                    {
+                        rule.Removed += OnRuleRemoved;
+                        rule.PropertyChanged += OnRuleChanged;
+                        Rules.Add(rule);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    // Handle the exception (e.g., log or display an error)
+                    Console.WriteLine($"Error deserializing rules: {ex.Message}");
+                }
+            }
+            else
+            {
+                // Add a default rule if no saved rules are found
+                AddRule.Execute(null);
+            }
+        }
+
+        public string SavedRules
+        {
+            get => Properties.Settings.Default.SavedRules;
+            set
+            {
+                Properties.Settings.Default.SavedRules = value;
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        private void SaveRules()
+        {
+            // Save rules to settings
+            var serializedRules = SerializeRules(); // Serialize Rules collection to a string
+            Properties.Settings.Default.SavedRules = serializedRules;
+            Properties.Settings.Default.Save();
+
+            Console.WriteLine($"SavedRules after save: {Properties.Settings.Default.SavedRules}");
+        }
+
+        private string SerializeRules()
+        {
+            // Serialize Rules collection to a JSON string
+            try
+            {
+                var serializedRules = JsonConvert.SerializeObject(Rules);
+                return serializedRules;
+            }
+            catch (Exception ex)
+            {
+                // Handle the exception (e.g., log or display an error)
+                Console.WriteLine($"Error serializing rules: {ex.Message}");
+                return string.Empty;
+            }
         }
     }
 }

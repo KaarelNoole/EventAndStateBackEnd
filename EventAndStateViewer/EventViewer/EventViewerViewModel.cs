@@ -87,23 +87,9 @@ namespace EventAndStateViewer.EventViewer
 
         private async Task DelayToDatabaseAsync()
         {
-            await Task.Delay(100);
-            // You can add any other asynchronous logic related to the database here
+            await Task.Delay(2000);
+            
         }
-
-
-        //private string LookupCameraName(string cameraId)
-        //{
-        //    // Replace this dictionary with your actual data source or service
-        //    Dictionary<string, string> cameraDictionary = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-        //    {
-        //{ "5c9ed10a-3a45-4149-9676", "HikVision DS-2CD4026FWD-AP (10.100.80.70) - Camera 1" },
-        //// Add more entries as needed for other UUIDs
-        //     };
-
-        //    // Perform the actual lookup
-        //    return cameraDictionary.TryGetValue(cameraId, out var cameraName) ? cameraName : "Unknown Camera";
-        //}
 
         private void OnClearEvents()
         {
