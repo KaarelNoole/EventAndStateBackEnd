@@ -44,7 +44,7 @@ namespace EventAndStateViewer.Subscription
 
             // Load saved rules or add a default one
             LoadRules();
-            
+
         }
 
         private async Task OnSubscribeAsync()
@@ -78,7 +78,7 @@ namespace EventAndStateViewer.Subscription
 
         private void OnRuleRemoved(object sender, EventArgs e)
         {
-            
+
             if (sender is SubscriptionRuleViewModel rule)
             {
                 rule.Removed -= OnRuleRemoved;

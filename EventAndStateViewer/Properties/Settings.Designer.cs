@@ -27,6 +27,34 @@ namespace EventAndStateViewer.Properties
             }
         }
 
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string SavedEventTypes
+        {
+            get
+            {
+                return ((string)(this["SavedEventTypes"]));
+            }
+            set
+            {
+                this["SavedEventTypes"] = value;
+            }
+        }
+
+        //[global::System.Configuration.UserScopedSettingAttribute()]
+        //[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //public string SavedRules
+        //{
+        //    get
+        //    {
+        //        return ((string)(this["SavedRules"]));
+        //    }
+        //    set
+        //    {
+        //        this["SavedRules"] = value;
+        //    }
+        //}
+
         public string SavedRules { get; internal set; }
     }
 }
