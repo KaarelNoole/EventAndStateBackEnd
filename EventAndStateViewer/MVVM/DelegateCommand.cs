@@ -4,9 +4,7 @@ using System.Windows.Input;
 
 namespace EventAndStateViewer.Mvvm
 {
-    /// <summary>
-    /// Implementation of <see cref="ICommand"/>, supporting both synchronous and asynchronous commands.
-    /// </summary>
+
     class DelegateCommand : ICommand
     {
         private readonly Action _action;

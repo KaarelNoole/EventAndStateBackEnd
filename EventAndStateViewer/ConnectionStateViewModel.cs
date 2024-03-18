@@ -4,9 +4,6 @@ using VideoOS.Platform.EventsAndState;
 
 namespace EventAndStateViewer
 {
-    /// <summary>
-    /// View model for the connection state shown within MainWindow.xaml
-    /// </summary>
     class ConnectionStateViewModel : ViewModelBase
     {
         private string _errorStateMessage = string.Empty;

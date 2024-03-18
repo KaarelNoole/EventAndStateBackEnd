@@ -9,9 +9,6 @@ using VideoOS.Platform.EventsAndState;
 
 namespace EventAndStateViewer.Subscription
 {
-    /// <summary>
-    /// View model for SubscriptionControl.xaml
-    /// </summary>
     class SubscriptionViewModel : ViewModelBase
     {
         private readonly IEventsAndStateSession _session;
@@ -42,7 +39,6 @@ namespace EventAndStateViewer.Subscription
             Subscribe = new DelegateCommand(OnSubscribeAsync);
             AddRule = new DelegateCommand(OnAddRule);
 
-            // Load saved rules or add a default one
             LoadRules();
 
         }
@@ -50,18 +46,15 @@ namespace EventAndStateViewer.Subscription
         private async Task OnSubscribeAsync()
         {
             Console.WriteLine("OnSubscribeAsync method called");
-            // Unsubscribe, if needed
             if (_subscriptionId != Guid.Empty)
             {
                 await _session.RemoveSubscriptionAsync(_subscriptionId, default);
             }
 
-            // Subscribe
             var rules = Rules.Select(r => r.ToRule());
             _subscriptionId = await _session.AddSubscriptionAsync(rules, default);
             IsDirty = false;
 
-            // Save rules
             SaveRules();
 
             Subscribed?.Invoke(this, EventArgs.Empty);
@@ -87,7 +80,6 @@ namespace EventAndStateViewer.Subscription
             }
             if (Rules.Count == 0)
             {
-                // Add a new rule to prevent 0 rules
                 AddRule.Execute(null);
             }
             IsDirty = true;
@@ -107,10 +99,8 @@ namespace EventAndStateViewer.Subscription
             {
                 try
                 {
-                    // Deserialize the saved rules and add them to the collection
                     var deserializedRules = JsonConvert.DeserializeObject<ObservableCollection<SubscriptionRuleViewModel>>(savedRules);
 
-                    // Clear existing rules and add the loaded rules
                     Rules.Clear();
                     foreach (var rule in deserializedRules)
                     {
@@ -121,13 +111,11 @@ namespace EventAndStateViewer.Subscription
                 }
                 catch (Exception ex)
                 {
-                    // Handle the exception (e.g., log or display an error)
                     Console.WriteLine($"Error deserializing rules: {ex.Message}");
                 }
             }
             else
             {
-                // Add a default rule if no saved rules are found
                 AddRule.Execute(null);
             }
         }
@@ -144,8 +132,7 @@ namespace EventAndStateViewer.Subscription
 
         private void SaveRules()
         {
-            // Save rules to settings
-            var serializedRules = SerializeRules(); // Serialize Rules collection to a string
+            var serializedRules = SerializeRules(); 
             Properties.Settings.Default.SavedRules = serializedRules;
             Properties.Settings.Default.Save();
 
@@ -154,7 +141,6 @@ namespace EventAndStateViewer.Subscription
 
         private string SerializeRules()
         {
-            // Serialize Rules collection to a JSON string
             try
             {
                 var serializedRules = JsonConvert.SerializeObject(Rules);
@@ -162,7 +148,6 @@ namespace EventAndStateViewer.Subscription
             }
             catch (Exception ex)
             {
-                // Handle the exception (e.g., log or display an error)
                 Console.WriteLine($"Error serializing rules: {ex.Message}");
                 return string.Empty;
             }

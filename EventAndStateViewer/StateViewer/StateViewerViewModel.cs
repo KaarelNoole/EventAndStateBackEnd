@@ -9,9 +9,7 @@ using VideoOS.Platform.EventsAndState;
 
 namespace EventAndStateViewer.StateViewer
 {
-    /// <summary>
-    /// View model for StateViewerControl.xaml 
-    /// </summary>
+
     class StateViewerViewModel : ViewModelBase
     {
         private readonly IEventsAndStateSession _session;
@@ -32,7 +30,6 @@ namespace EventAndStateViewer.StateViewer
 
         private void OnEventsReceived(object sender, IEnumerable<Event> events)
         {
-            // Update state based on stateful events
             foreach (var @event in events.Where(e => e.StateGroupId.HasValue))
             {
                 UpdateState(@event.Source, @event.StateGroupId.Value, @event.Type);
@@ -41,7 +38,6 @@ namespace EventAndStateViewer.StateViewer
 
         private async Task OnRefreshAsync()
         {
-            // Clear states and have the session resend states to the event receiver
             States.Clear();
             var states = await _session.GetCurrentStateAsync(default);
             foreach (var state in states)
@@ -52,7 +48,6 @@ namespace EventAndStateViewer.StateViewer
 
         public void UpdateState(string sourcePath, Guid stateGroupId, Guid eventType)
         {
-            // Add or update state with matching source or state group
             var state = States.FirstOrDefault(s => s.SourcePath == sourcePath && s.StateGroupId == stateGroupId);
             if (state == null)
             {

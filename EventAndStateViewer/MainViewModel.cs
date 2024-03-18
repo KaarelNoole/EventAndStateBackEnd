@@ -5,9 +5,6 @@ using System.Collections;
 
 namespace EventAndStateViewer
 {
-    /// <summary>
-    /// View model for MainWindow.xaml
-    /// </summary>
     class MainViewModel
     {
         public ConnectionStateViewModel ConnectionStateViewModel { get; } = new ConnectionStateViewModel();
@@ -19,7 +16,6 @@ namespace EventAndStateViewer
 
         public MainViewModel()
         {
-            // Refresh state and clear events, when a new subscription is made
             SubscriptionViewModel.Subscribed += (s, e) => StateViewerViewModel.Refresh.Execute(null);
             SubscriptionViewModel.Subscribed += (s, e) => EventViewerViewModel.Clear.Execute(null);
         }

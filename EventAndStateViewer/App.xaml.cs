@@ -6,9 +6,6 @@ using VideoOS.Platform.SDK.UI.LoginDialog;
 
 namespace EventAndStateViewer
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
         private static Guid _integrationId = new Guid("b71d9aff-493e-4597-aec7-5e5f4334bd33");
@@ -29,7 +26,6 @@ namespace EventAndStateViewer
 
             if (!connected)
             {
-                // Login was cancelled
                 Shutdown();
                 return;
             }

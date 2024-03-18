@@ -4,9 +4,6 @@ using VideoOS.Platform.EventsAndState;
 
 namespace EventAndStateViewer.EventViewer
 {
-    /// <summary>
-    /// View model for a single event within the <see cref="EventViewerViewModel"/>.
-    /// </summary>
     class EventViewModel : ViewModelBase
     {
         private readonly CachedRestApiClient _restApiClient;

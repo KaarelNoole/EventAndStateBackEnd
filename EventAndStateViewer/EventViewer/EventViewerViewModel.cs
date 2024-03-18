@@ -39,7 +39,6 @@ namespace EventAndStateViewer.EventViewer
                 DateTime eventTime = @event.Time;
                 var eventViewModel = new EventViewModel(@event);
 
-                // Extract the camera name from the Source property
                 string cameraName = eventViewModel.Source;
                 
                 string source = cameraName;
@@ -87,8 +86,8 @@ namespace EventAndStateViewer.EventViewer
 
         private async Task DelayToDatabaseAsync()
         {
-            await Task.Delay(2000);
-            
+            await Task.Delay(750);
+
         }
 
         private void OnClearEvents()

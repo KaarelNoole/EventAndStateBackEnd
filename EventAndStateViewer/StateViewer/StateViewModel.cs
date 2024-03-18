@@ -3,9 +3,6 @@ using System;
 
 namespace EventAndStateViewer.StateViewer
 {
-    /// <summary>
-    /// View model for a single state within the <see cref="StateViewerViewModel"/>.
-    /// </summary>
     class StateViewModel : ViewModelBase
     {
         private readonly CachedRestApiClient _restApiClient;

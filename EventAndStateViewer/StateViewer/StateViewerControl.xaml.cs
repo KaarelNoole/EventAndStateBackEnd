@@ -5,9 +5,7 @@ using VideoOS.Platform.UI.Controls;
 
 namespace EventAndStateViewer.StateViewer
 {
-    /// <summary>
-    /// Interaction logic for StateViewerControl.xaml
-    /// </summary>
+
     public partial class StateViewerControl : UserControl
     {
         public StateViewerControl()
@@ -15,10 +13,6 @@ namespace EventAndStateViewer.StateViewer
             InitializeComponent();
         }
 
-        // The VideoOSTable does not re-sort items when an item property is updated (this behavoir is the same as DataGrid).
-        // Therefore the below event handlers subscribe to the PropertyChanged event on each StateViewModel and re-sorts the table,
-        // if a property in the SortColumn has changed.
-        // Note: This may not scale to a huge number of items.
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
@@ -44,7 +38,6 @@ namespace EventAndStateViewer.StateViewer
         {
             if (e.PropertyName == StateTable.SortColumn.ItemSortPropertyName)
             {
-                // Re-sort the SortColumn by resetting the sort direction
                 var originalSortDirection = StateTable.SortDirection;
                 var inverseSortDirection = StateTable.SortDirection == VideoOSTable.SortDirections.Ascending ? VideoOSTable.SortDirections.Descending : VideoOSTable.SortDirections.Ascending;
                 StateTable.SortDirection = inverseSortDirection;

@@ -9,12 +9,6 @@ using VideoOS.Platform.UI;
 
 namespace EventAndStateViewer.Subscription
 {
-    /// <summary>
-    /// View model for a single <see cref="SubscriptionRule"/> within the <see cref="SubscriptionViewModel"/>.
-    /// <br/><br/>
-    /// This class contains commands for selecting <see cref="SubscriptionRule.Modifier"/>, <see cref="SubscriptionRule.ResourceTypes"/>,
-    /// <see cref="SubscriptionRule.SourceIds"/>, and <see cref="SubscriptionRule.EventTypes"/> using <see cref="ItemPickerWpfWindow"/>.
-    /// </summary>
     class SubscriptionRuleViewModel : ViewModelBase
     {
         private readonly SubscriptionItemProvider _itemProvider = new SubscriptionItemProvider();
@@ -51,9 +45,6 @@ namespace EventAndStateViewer.Subscription
             EditEventTypes = new DelegateCommand(async () => EditItems(await _itemProvider.GetEventTypesAsync(), ref _eventTypes, nameof(EventTypesText)));
         }
 
-        /// <summary>
-        /// Convert this view model to a <see cref="SubscriptionRule"/>.
-        /// </summary>
         public SubscriptionRule ToRule()
         {
             return new SubscriptionRule(
@@ -63,10 +54,6 @@ namespace EventAndStateViewer.Subscription
                 _eventTypes.Any() ? new EventTypes(_eventTypes.Select(x => x.FQID.ObjectId)) : EventTypes.Any);
         }
 
-
-        /// <summary>
-        /// Show an Item Picker, allowing user to edit selected items.
-        /// </summary>
         private void EditItems(IEnumerable<Item> availableItems, ref IEnumerable<Item> selectedItems, string propertyName)
         {
             var itemPicker = new ItemPickerWpfWindow
@@ -77,11 +64,9 @@ namespace EventAndStateViewer.Subscription
                 SelectedItems = selectedItems,
             };
 
-            // Show item picker
             if (!itemPicker.ShowDialog().GetValueOrDefault())
                 return;
 
-            // Update selected items and notify the UI
             selectedItems = itemPicker.SelectedItems;
             InvokePropertyChanged(propertyName);
         }

@@ -29,7 +29,6 @@
             </controls:VideoOSTabControlPrimaryHorizontalLarge.Resources>
             <controls:VideoOSTabControlPrimaryHorizontalLarge.ContentTemplate>
                 <DataTemplate>
-                    <!-- Display tabs using above templates depending on type -->
                     <ContentPresenter Content="{Binding}" />
                 </DataTemplate>
             </controls:VideoOSTabControlPrimaryHorizontalLarge.ContentTemplate>
