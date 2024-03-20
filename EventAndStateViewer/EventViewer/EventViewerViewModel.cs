@@ -1,4 +1,4 @@
-﻿using EventAndStateViewer.Mvvm;
+﻿using EventAndStateBackEnd.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer.EventViewer
+namespace EventAndStateBackEnd.EventViewer
 {
     class EventViewerViewModel : ViewModelBase
     {

@@ -4,7 +4,7 @@ using VideoOS.Platform.Login;
 using VideoOS.Platform;
 using VideoOS.Platform.SDK.UI.LoginDialog;
 
-namespace EventAndStateViewer
+namespace EventAndStateBackEnd
 {
     public partial class App : Application
     {

@@ -1,7 +1,7 @@
-﻿using EventAndStateViewer.Mvvm;
+﻿using EventAndStateBackEnd.Mvvm;
 using System;
 
-namespace EventAndStateViewer.StateViewer
+namespace EventAndStateBackEnd.StateViewer
 {
     class StateViewModel : ViewModelBase
     {

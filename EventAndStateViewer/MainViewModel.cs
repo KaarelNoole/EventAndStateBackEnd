@@ -1,9 +1,9 @@
-﻿using EventAndStateViewer.EventViewer;
-using EventAndStateViewer.StateViewer;
-using EventAndStateViewer.Subscription;
+﻿using EventAndStateBackEnd.EventViewer;
+using EventAndStateBackEnd.StateViewer;
+using EventAndStateBackEnd.Subscription;
 using System.Collections;
 
-namespace EventAndStateViewer
+namespace EventAndStateBackEnd
 {
     class MainViewModel
     {

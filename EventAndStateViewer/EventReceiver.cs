@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer
+namespace EventAndStateBackEnd
 {
 
     class EventReceiver : IEventReceiver

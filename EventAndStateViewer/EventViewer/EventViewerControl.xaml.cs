@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Windows.Controls;
 
-namespace EventAndStateViewer.EventViewer
+namespace EventAndStateBackEnd.EventViewer
 {
 
     public partial class EventViewerControl : UserControl

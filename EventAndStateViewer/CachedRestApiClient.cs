@@ -7,7 +7,7 @@ using VideoOS.Platform.Login;
 using VideoOS.Platform.Proxy.RestApi;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer
+namespace EventAndStateBackEnd
 {
 
     class CachedRestApiClient : IDisposable

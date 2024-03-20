@@ -1,8 +1,8 @@
-﻿using EventAndStateViewer.Mvvm;
+﻿using EventAndStateBackEnd.Mvvm;
 using System;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer.EventViewer
+namespace EventAndStateBackEnd.EventViewer
 {
     class EventViewModel : ViewModelBase
     {

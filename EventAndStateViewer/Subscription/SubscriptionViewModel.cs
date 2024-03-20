@@ -1,4 +1,4 @@
-﻿using EventAndStateViewer.Mvvm;
+﻿using EventAndStateBackEnd.Mvvm;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer.Subscription
+namespace EventAndStateBackEnd.Subscription
 {
     class SubscriptionViewModel : ViewModelBase
     {
@@ -32,30 +32,30 @@ namespace EventAndStateViewer.Subscription
 
         public SubscriptionViewModel()
         {
-            Console.WriteLine("SubscriptionViewModel constructor called");
-
             _session = App.DataModel.Session;
 
             Subscribe = new DelegateCommand(OnSubscribeAsync);
             AddRule = new DelegateCommand(OnAddRule);
 
-            LoadRules();
+            // Add a rule
+            AddRule.Execute(null);
 
+            // Discourage subscribing to everything by forcing user to make some change
+            IsDirty = false;
         }
 
         private async Task OnSubscribeAsync()
         {
-            Console.WriteLine("OnSubscribeAsync method called");
+            // Unsubscribe, if needed
             if (_subscriptionId != Guid.Empty)
             {
                 await _session.RemoveSubscriptionAsync(_subscriptionId, default);
             }
 
+            // Subscribe
             var rules = Rules.Select(r => r.ToRule());
             _subscriptionId = await _session.AddSubscriptionAsync(rules, default);
             IsDirty = false;
-
-            SaveRules();
 
             Subscribed?.Invoke(this, EventArgs.Empty);
         }
@@ -71,7 +71,6 @@ namespace EventAndStateViewer.Subscription
 
         private void OnRuleRemoved(object sender, EventArgs e)
         {
-
             if (sender is SubscriptionRuleViewModel rule)
             {
                 rule.Removed -= OnRuleRemoved;
@@ -80,6 +79,7 @@ namespace EventAndStateViewer.Subscription
             }
             if (Rules.Count == 0)
             {
+                // Add a new rule to prevent 0 rules
                 AddRule.Execute(null);
             }
             IsDirty = true;
@@ -88,69 +88,6 @@ namespace EventAndStateViewer.Subscription
         private void OnRuleChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             IsDirty = true;
-        }
-
-
-        private void LoadRules()
-        {
-            Console.WriteLine("LoadRules method called");
-            var savedRules = Properties.Settings.Default.SavedRules;
-            if (!string.IsNullOrEmpty(savedRules))
-            {
-                try
-                {
-                    var deserializedRules = JsonConvert.DeserializeObject<ObservableCollection<SubscriptionRuleViewModel>>(savedRules);
-
-                    Rules.Clear();
-                    foreach (var rule in deserializedRules)
-                    {
-                        rule.Removed += OnRuleRemoved;
-                        rule.PropertyChanged += OnRuleChanged;
-                        Rules.Add(rule);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error deserializing rules: {ex.Message}");
-                }
-            }
-            else
-            {
-                AddRule.Execute(null);
-            }
-        }
-
-        public string SavedRules
-        {
-            get => Properties.Settings.Default.SavedRules;
-            set
-            {
-                Properties.Settings.Default.SavedRules = value;
-                Properties.Settings.Default.Save();
-            }
-        }
-
-        private void SaveRules()
-        {
-            var serializedRules = SerializeRules(); 
-            Properties.Settings.Default.SavedRules = serializedRules;
-            Properties.Settings.Default.Save();
-
-            Console.WriteLine($"SavedRules after save: {Properties.Settings.Default.SavedRules}");
-        }
-
-        private string SerializeRules()
-        {
-            try
-            {
-                var serializedRules = JsonConvert.SerializeObject(Rules);
-                return serializedRules;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error serializing rules: {ex.Message}");
-                return string.Empty;
-            }
         }
     }
 }

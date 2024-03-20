@@ -2,7 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace EventAndStateViewer.Mvvm
+namespace EventAndStateBackEnd.Mvvm
 {
 
     public abstract class ViewModelBase : INotifyPropertyChanged

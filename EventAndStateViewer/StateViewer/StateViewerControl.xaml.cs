@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Controls;
 using VideoOS.Platform.UI.Controls;
 
-namespace EventAndStateViewer.StateViewer
+namespace EventAndStateBackEnd.StateViewer
 {
 
     public partial class StateViewerControl : UserControl

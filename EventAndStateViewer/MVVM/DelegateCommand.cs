@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace EventAndStateViewer.Mvvm
+namespace EventAndStateBackEnd.Mvvm
 {
 
     class DelegateCommand : ICommand

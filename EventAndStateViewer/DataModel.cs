@@ -2,7 +2,7 @@
 using VideoOS.Platform.Login;
 using VideoOS.Platform.EventsAndState;
 
-namespace EventAndStateViewer
+namespace EventAndStateBackEnd
 {
     class DataModel : IDisposable
     {

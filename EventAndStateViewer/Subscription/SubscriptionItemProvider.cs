@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using VideoOS.Platform;
 using VideoOS.Platform.JsonHandling;
 
-namespace EventAndStateViewer.Subscription
+namespace EventAndStateBackEnd.Subscription
 {
 
     class SubscriptionItemProvider

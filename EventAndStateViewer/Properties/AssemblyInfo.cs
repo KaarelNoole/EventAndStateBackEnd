@@ -4,11 +4,11 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Windows;
 
-[assembly: AssemblyTitle("EventAndStateViewer")]
+[assembly: AssemblyTitle("EventAndStateBackEnd")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Milestone")]
-[assembly: AssemblyProduct("EventAndStateViewer")]
+[assembly: AssemblyProduct("EventAndStateBackEnd")]
 [assembly: AssemblyCopyright("Copyright © Milestone 2023")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

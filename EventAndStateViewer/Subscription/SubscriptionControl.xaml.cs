@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace EventAndStateViewer.Subscription
+namespace EventAndStateBackEnd.Subscription
 {
     public partial class SubscriptionControl : UserControl
     {

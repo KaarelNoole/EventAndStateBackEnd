@@ -1,4 +1,4 @@
-﻿using EventAndStateViewer.Mvvm;
+﻿using EventAndStateBackEnd.Mvvm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using VideoOS.Platform;
 using VideoOS.Platform.EventsAndState;
 using VideoOS.Platform.UI;
 
-namespace EventAndStateViewer.Subscription
+namespace EventAndStateBackEnd.Subscription
 {
     class SubscriptionRuleViewModel : ViewModelBase
     {
