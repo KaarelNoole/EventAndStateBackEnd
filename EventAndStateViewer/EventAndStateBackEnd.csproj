@@ -33,7 +33,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>EventAndStateViewer.App</StartupObject>
+    <StartupObject>EventAndStateBackEnd.App</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>SDK_VS.ico</ApplicationIcon>
