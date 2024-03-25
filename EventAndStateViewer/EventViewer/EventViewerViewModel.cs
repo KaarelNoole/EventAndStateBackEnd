@@ -30,7 +30,7 @@ namespace EventAndStateBackEnd.EventViewer
             string connectionString = "Data Source=10.100.80.67;Initial Catalog=minubaas;User ID=minunimi;Password=test;";
 
             
-            string insertQuery = "INSERT INTO Camera (EventTime, Source, Event, CameraID) VALUES (@EventTime, @Source, @Event, @CameraID)";
+            string insertQuery = "INSERT INTO Alarm (EventTime, Source, Event, CameraID) VALUES (@EventTime, @Source, @Event, @CameraID)";
 
             foreach (var @event in events)
             {
