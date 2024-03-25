@@ -30,7 +30,7 @@ namespace EventAndStateBackEnd.EventViewer
             string connectionString = "Data Source=10.100.80.67;Initial Catalog=minubaas;User ID=minunimi;Password=test;";
 
             
-            string insertQuery = "INSERT INTO Alarm (EventTime, Source, Event, CameraID) VALUES (@EventTime, @Source, @Event, @CameraID)";
+            string insertQuery = "INSERT INTO Alarm ( EventTime, Source, Event, CameraID) VALUES ( @EventTime, @Source, @Event, @CameraID)";
 
             foreach (var @event in events)
             {
@@ -40,7 +40,7 @@ namespace EventAndStateBackEnd.EventViewer
                 var eventViewModel = new EventViewModel(@event);
 
                 string cameraName = eventViewModel.Source;
-                
+                var EventId = @event.Id;
                 string source = cameraName;
                 string EventName = eventViewModel.EventType;
                 string eventText = EventName;
@@ -53,8 +53,7 @@ namespace EventAndStateBackEnd.EventViewer
 
                     
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                    {
-                        
+                    {     
                         command.Parameters.AddWithValue("@EventTime", eventTime);
                         command.Parameters.AddWithValue("@Source", source);
                         command.Parameters.AddWithValue("@Event", eventText);
