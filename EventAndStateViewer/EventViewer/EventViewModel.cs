@@ -1,6 +1,7 @@
 ﻿using EventAndStateBackEnd.Mvvm;
 using System;
 using VideoOS.Platform.EventsAndState;
+using Event = VideoOS.Platform.EventsAndState.Event;
 
 namespace EventAndStateBackEnd.EventViewer
 {
