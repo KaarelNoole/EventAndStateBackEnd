@@ -26,45 +26,41 @@ namespace EventAndStateBackEnd.EventViewer
 
         private async void OnEventsReceived(object sender, IEnumerable<Event> events)
         {
-            
             string connectionString = "Data Source=10.100.80.67;Initial Catalog=minubaas;User ID=minunimi;Password=test;";
 
-            
-            string insertQuery = "INSERT INTO Alarm ( EventTime, Source, Event, CameraID) VALUES ( @EventTime, @Source, @Event, @CameraID)";
+            string insertQuery = "INSERT INTO Alarm (EventTime, Source, Event, CameraID) VALUES (@EventTime, @Source, @Event, @CameraID)";
 
             foreach (var @event in events)
             {
                 Events.Add(new EventViewModel(@event));
                 await DelayToDatabaseAsync();
-                DateTime eventTime = @event.Time;
+                DateTime eventTimeUtc = @event.Time;
+                DateTime eventTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(eventTimeUtc, TimeZoneInfo.Local); 
                 var eventViewModel = new EventViewModel(@event);
 
                 string cameraName = eventViewModel.Source;
-                var EventId = @event.Id;
+                var eventId = @event.Id;
                 string source = cameraName;
-                string EventName = eventViewModel.EventType;
-                string eventText = EventName;
+                string eventName = eventViewModel.EventType;
+                string eventText = eventName;
 
-                string CameraID = @event.Source;
+                string cameraId = @event.Source;
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
 
-                    
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
-                    {     
-                        command.Parameters.AddWithValue("@EventTime", eventTime);
+                    {
+                        command.Parameters.AddWithValue("@EventTime", eventTimeLocal);
                         command.Parameters.AddWithValue("@Source", source);
                         command.Parameters.AddWithValue("@Event", eventText);
-                        command.Parameters.AddWithValue("@CameraID", CameraID);
+                        command.Parameters.AddWithValue("@CameraID", cameraId);
 
                         try
                         {
-                            
                             int rowsAffected = command.ExecuteNonQuery();
 
-                            
                             if (rowsAffected > 0)
                             {
                                 Console.WriteLine("Record inserted successfully.");

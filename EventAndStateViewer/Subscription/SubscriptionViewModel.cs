@@ -37,22 +37,18 @@ namespace EventAndStateBackEnd.Subscription
             Subscribe = new DelegateCommand(OnSubscribeAsync);
             AddRule = new DelegateCommand(OnAddRule);
 
-            // Add a rule
             AddRule.Execute(null);
 
-            // Discourage subscribing to everything by forcing user to make some change
             IsDirty = false;
         }
 
         private async Task OnSubscribeAsync()
         {
-            // Unsubscribe, if needed
             if (_subscriptionId != Guid.Empty)
             {
                 await _session.RemoveSubscriptionAsync(_subscriptionId, default);
             }
 
-            // Subscribe
             var rules = Rules.Select(r => r.ToRule());
             _subscriptionId = await _session.AddSubscriptionAsync(rules, default);
             IsDirty = false;
@@ -79,7 +75,6 @@ namespace EventAndStateBackEnd.Subscription
             }
             if (Rules.Count == 0)
             {
-                // Add a new rule to prevent 0 rules
                 AddRule.Execute(null);
             }
             IsDirty = true;
