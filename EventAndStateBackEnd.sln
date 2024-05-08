@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34511.84
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAndStateBackEnd", "EventAndStateViewer\EventAndStateBackEnd.csproj", "{9E025EF7-988B-48BC-8897-58C7FC85F7FD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventAndStateBackEnd", "EventAndStateBackEnd\EventAndStateBackEnd.csproj", "{9E025EF7-988B-48BC-8897-58C7FC85F7FD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

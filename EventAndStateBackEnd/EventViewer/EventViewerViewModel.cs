@@ -35,8 +35,10 @@ namespace EventAndStateBackEnd.EventViewer
                 Events.Add(new EventViewModel(@event));
                 await DelayToDatabaseAsync();
                 DateTime eventTimeUtc = @event.Time;
-                DateTime eventTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(eventTimeUtc, TimeZoneInfo.Local); 
+                DateTime eventTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(eventTimeUtc, TimeZoneInfo.Local);
                 var eventViewModel = new EventViewModel(@event);
+
+                string formattedEventTime = eventTimeLocal.ToString("dd.MM.yyyy HH:mm:ss");
 
                 string cameraName = eventViewModel.Source;
                 var eventId = @event.Id;
@@ -52,7 +54,7 @@ namespace EventAndStateBackEnd.EventViewer
 
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@EventTime", eventTimeLocal);
+                        command.Parameters.AddWithValue("@EventTime", formattedEventTime);
                         command.Parameters.AddWithValue("@Source", source);
                         command.Parameters.AddWithValue("@Event", eventText);
                         command.Parameters.AddWithValue("@CameraID", cameraId);
@@ -63,16 +65,16 @@ namespace EventAndStateBackEnd.EventViewer
 
                             if (rowsAffected > 0)
                             {
-                                Console.WriteLine("Record inserted successfully.");
+                                Console.WriteLine("Alarmi sisestamine õnnestus.");
                             }
                             else
                             {
-                                Console.WriteLine("No records inserted.");
+                                Console.WriteLine("Alarmi pole sisestatud.");
                             }
                         }
                         catch (Exception ex)
                         {
-                            Console.WriteLine("Error: " + ex.Message);
+                            Console.WriteLine("Veateade: " + ex.Message);
                         }
                     }
                 }
@@ -81,7 +83,7 @@ namespace EventAndStateBackEnd.EventViewer
 
         private async Task DelayToDatabaseAsync()
         {
-            await Task.Delay(750);
+            await Task.Delay(1000);
 
         }
 
