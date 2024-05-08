@@ -13,12 +13,12 @@ namespace EventAndStateBackEnd
 
         public async Task OnConnectionStateChangedAsync(ConnectionState newState)
         {
-            await App.Current.Dispatcher.BeginInvoke(new Action(() => ConnectionStateChanged?.Invoke(this, newState)));
+            await System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => ConnectionStateChanged?.Invoke(this, newState)));
         }
 
         public async Task OnEventsReceivedAsync(IEnumerable<Event> events)
         {
-            await App.Current.Dispatcher.BeginInvoke(new Action(() => EventsReceived?.Invoke(this, events)));
+            await System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() => EventsReceived?.Invoke(this, events)));
         }
     }
 }
