@@ -10,7 +10,7 @@
         xmlns:controls="clr-namespace:VideoOS.Platform.UI.Controls;assembly=VideoOS.Platform"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainViewModel}"
-        Title="Event and state viewer" Height="450" Width="800">
+        Title="Event and state backend" Height="450" Width="800">
     <Grid>
         <controls:VideoOSTextBlockH2 Text="{Binding ConnectionStateViewModel.SuccessStateMessage}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15" Foreground="Green" />
         <controls:VideoOSTextBlockH2 Text="{Binding ConnectionStateViewModel.ErrorStateMessage}" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="15" Foreground="Red" />

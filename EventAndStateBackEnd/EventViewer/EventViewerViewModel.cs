@@ -38,7 +38,6 @@ namespace EventAndStateBackEnd.EventViewer
                 DateTime eventTimeLocal = TimeZoneInfo.ConvertTimeFromUtc(eventTimeUtc, TimeZoneInfo.Local);
                 var eventViewModel = new EventViewModel(@event);
 
-                string formattedEventTime = eventTimeLocal.ToString("dd.MM.yyyy HH:mm:ss");
 
                 string cameraName = eventViewModel.Source;
                 var eventId = @event.Id;
@@ -54,7 +53,7 @@ namespace EventAndStateBackEnd.EventViewer
 
                     using (SqlCommand command = new SqlCommand(insertQuery, connection))
                     {
-                        command.Parameters.AddWithValue("@EventTime", formattedEventTime);
+                        command.Parameters.AddWithValue("@EventTime", eventTimeLocal);
                         command.Parameters.AddWithValue("@Source", source);
                         command.Parameters.AddWithValue("@Event", eventText);
                         command.Parameters.AddWithValue("@CameraID", cameraId);
@@ -83,7 +82,7 @@ namespace EventAndStateBackEnd.EventViewer
 
         private async Task DelayToDatabaseAsync()
         {
-            await Task.Delay(1000);
+            await Task.Delay(1500);
 
         }
 
